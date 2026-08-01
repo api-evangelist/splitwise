@@ -1,0 +1,79 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://dev.splitwise.com — the "unofficial libraries" section of the
+  Splitwise API documentation. Splitwise does NOT publish any first-party
+  client SDKs; every library below is community-built and listed by Splitwise
+  as unofficial, so all are marked official:false. Repository URLs recorded as
+  linked from the docs.
+note: >-
+  No first-party Splitwise SDK exists. Splitwise recommends using a generic
+  OAuth 2 client library (https://oauth.net/code/) plus direct HTTPS calls, or
+  one of the community wrappers below.
+packages:
+- language: dart
+  registry: github
+  name: splitwise_api
+  url: https://github.com/srthkpthk/splitwise_api
+  source: https://github.com/srthkpthk/splitwise_api
+  official: false
+- language: elixir
+  registry: github
+  name: ex_splitwise
+  url: https://github.com/matiasdelgado/ex_splitwise
+  source: https://github.com/matiasdelgado/ex_splitwise
+  official: false
+- language: go
+  registry: github
+  name: splitwise.go
+  url: https://github.com/anvari1313/splitwise.go
+  source: https://github.com/anvari1313/splitwise.go
+  official: false
+- language: go
+  registry: github
+  name: splitwise.go
+  url: https://github.com/aanzolaavila/splitwise.go
+  source: https://github.com/aanzolaavila/splitwise.go
+  official: false
+- language: haskell
+  registry: github
+  name: splitwise-hs
+  url: https://github.com/daniel-beard/splitwise-hs
+  source: https://github.com/daniel-beard/splitwise-hs
+  official: false
+- language: java
+  registry: github
+  name: splitwise-java
+  url: https://github.com/sritejakv/splitwise-java
+  source: https://github.com/sritejakv/splitwise-java
+  official: false
+- language: javascript
+  registry: github
+  name: splitwise
+  url: https://github.com/keriwarr/splitwise
+  source: https://github.com/keriwarr/splitwise
+  official: false
+- language: typescript
+  registry: github
+  name: splitwise-ts
+  url: https://github.com/athulanilthomas/splitwise-ts
+  source: https://github.com/athulanilthomas/splitwise-ts
+  official: false
+- language: python
+  registry: github
+  name: splitwise
+  url: https://github.com/namaggarwal/splitwise
+  source: https://github.com/namaggarwal/splitwise
+  official: false
+- language: ruby
+  registry: github
+  name: splitwise-ruby
+  url: https://github.com/divyum/splitwise-ruby
+  source: https://github.com/divyum/splitwise-ruby
+  official: false
+- language: rust
+  registry: github
+  name: splitwise-rs
+  url: https://github.com/pbar1/splitwise-rs
+  source: https://github.com/pbar1/splitwise-rs
+  official: false

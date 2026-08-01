@@ -1,0 +1,92 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: >-
+  No official or community-hosted Splitwise MCP server was found. This is a
+  CANDIDATE tool surface DERIVED from the operations in
+  openapi/splitwise-openapi.json to show how the Splitwise Self-Serve API would
+  map to Model Context Protocol tools. Not an endorsement of any deployment.
+server:
+  name: splitwise
+  official: false
+  hosted_url: null
+  transport: null
+  auth: OAuth 2.0 (authorization code) or personal API key as Bearer token
+  base_url: https://secure.splitwise.com/api/v3.0
+tools:
+- name: get_current_user
+  method: GET
+  path: /get_current_user
+  summary: Get the authenticated user.
+- name: get_user
+  method: GET
+  path: /get_user/{id}
+  summary: Get another user by id.
+- name: update_user
+  method: POST
+  path: /update_user/{id}
+  summary: Update a user profile.
+- name: get_groups
+  method: GET
+  path: /get_groups
+  summary: List the user's groups.
+- name: get_group
+  method: GET
+  path: /get_group/{id}
+  summary: Get a group by id.
+- name: create_group
+  method: POST
+  path: /create_group
+  summary: Create a group.
+- name: delete_group
+  method: POST
+  path: /delete_group/{id}
+  summary: Delete a group.
+- name: get_friends
+  method: GET
+  path: /get_friends
+  summary: List friends.
+- name: create_friend
+  method: POST
+  path: /create_friend
+  summary: Add a friend.
+- name: get_expenses
+  method: GET
+  path: /get_expenses
+  summary: List expenses (filter/paginate).
+- name: get_expense
+  method: GET
+  path: /get_expense/{id}
+  summary: Get an expense by id.
+- name: create_expense
+  method: POST
+  path: /create_expense
+  summary: Create an expense.
+- name: update_expense
+  method: POST
+  path: /update_expense/{id}
+  summary: Update an expense.
+- name: delete_expense
+  method: POST
+  path: /delete_expense/{id}
+  summary: Delete an expense.
+- name: get_comments
+  method: GET
+  path: /get_comments
+  summary: List comments on an expense.
+- name: create_comment
+  method: POST
+  path: /create_comment
+  summary: Comment on an expense.
+- name: get_notifications
+  method: GET
+  path: /get_notifications
+  summary: Get recent activity.
+- name: get_currencies
+  method: GET
+  path: /get_currencies
+  summary: List supported currencies.
+- name: get_categories
+  method: GET
+  path: /get_categories
+  summary: List expense categories.

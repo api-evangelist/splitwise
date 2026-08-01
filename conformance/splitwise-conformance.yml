@@ -1,0 +1,35 @@
+generated: '2026-07-21'
+method: derived
+source: >-
+  Derived from openapi/splitwise-openapi.json (securitySchemes, 4xx error
+  schemas, list pagination parameters) and the Splitwise API documentation at
+  https://dev.splitwise.com. Assertions are about industry/cross-cutting
+  standards; absence of a standard is valid data.
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    securitySchemes.OAuth is oauth2 with the authorizationCode flow
+    (authorize /oauth/authorize, token /oauth/token). Apps register at
+    https://secure.splitwise.com/apps.
+- id: oidc
+  conforms: false
+  evidence: No /.well-known/openid-configuration (404) on www or secure hosts; no id_token.
+- id: bearer-token-auth
+  conforms: true
+  evidence: securitySchemes.ApiKeyAuth is http bearer (personal API key as Bearer token).
+- id: rfc9457
+  conforms: false
+  evidence: Errors are plain application/json ({error} or {errors.base[]}), not application/problem+json.
+- id: pagination
+  conforms: true
+  evidence: /get_expenses supports limit (default 20) and offset (default 0) query parameters.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency-key header or mechanism documented; write endpoints are not idempotent.
+- id: json:api
+  conforms: false
+  evidence: Responses are bespoke JSON envelopes, not JSON:API media type or structure.
+- id: webhooks
+  conforms: false
+  evidence: No webhook/callback surface; activity is retrieved by polling /get_notifications.

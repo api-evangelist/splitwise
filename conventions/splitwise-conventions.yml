@@ -1,0 +1,66 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://dev.splitwise.com and openapi/splitwise-openapi.json — the
+  cross-cutting request/response conventions that apply across the Splitwise
+  Self-Serve API (v3.0), not any single operation.
+description: >-
+  How the Splitwise REST API behaves across operations: authentication style,
+  the success/error envelope, list pagination, versioning, and rate-limit
+  posture. These are runtime-semantics conventions OpenAPI does not fully
+  express.
+
+base_url: https://secure.splitwise.com/api/v3.0
+api_style: REST over HTTPS; form-encoded or JSON request bodies, JSON responses
+
+authentication:
+  scheme: OAuth 2.0 authorization-code Bearer token, or a personal API key presented as a Bearer token
+  key_types: [oauth2 access token, personal API key (Authorization: Bearer <key>)]
+  register: https://secure.splitwise.com/apps
+  detail: authentication/splitwise-authentication.yml
+
+idempotency:
+  supported: false
+  notes: >-
+    Splitwise does not document an idempotency-key mechanism. Write operations
+    (create_expense, create_group, etc.) are not idempotent; retries can create
+    duplicate records. Clients must de-duplicate on their side.
+
+success_envelope:
+  notes: >-
+    A 200 OK status does NOT by itself indicate success. Responses carry the
+    created/affected resource(s) plus an `errors` object; some destructive
+    endpoints return a boolean `success` field. Callers MUST inspect `success`
+    and/or `errors` in the body, not just the HTTP status.
+  example_fields: [success, errors, expenses, groups, users]
+
+pagination:
+  style: limit/offset
+  applies_to: /get_expenses (and other list endpoints where documented)
+  request_params:
+    limit: integer, default 20
+    offset: integer, default 0
+  filter_params: [group_id, friend_id, dated_after, dated_before, updated_after, updated_before]
+  response_fields: []
+  notes: Not all list endpoints paginate; /get_groups and /get_friends return the full set.
+
+versioning:
+  scheme: path-based
+  current: v3.0
+  mechanism: version segment in the base path (/api/v3.0/)
+  detail: lifecycle/splitwise-lifecycle.yml
+
+error_envelope:
+  media_type: application/json
+  shapes:
+  - '{ "error": "<message>" }  (401 unauthorized)'
+  - '{ "errors": { "base": ["<message>", ...] } }  (400 / 403 / 404)'
+  rfc9457: false
+  detail: errors/splitwise-problem-types.yml
+
+rate_limiting:
+  documented: false
+  notes: >-
+    The API Terms of Use state usage is subject to rate limits "in the sole
+    discretion of Splitwise" but no numeric limit or rate-limit response header
+    is published.

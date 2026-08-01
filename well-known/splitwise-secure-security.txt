@@ -1,0 +1,2 @@
+Contact: mailto:security@splitwise.com
+Policy: https://blog.splitwise.com/about/responsible-disclosure-special-thanks/

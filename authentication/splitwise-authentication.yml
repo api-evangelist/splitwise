@@ -1,0 +1,35 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/splitwise-openapi.json
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: OAuth
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: /oauth/authorize
+    tokenUrl: /oauth/token
+    scopes: 0
+  description: |-
+    Splitwise uses OAuth 2 with the authorization code flow. To connect via OAuth 2, you'll need to [register your app](https://secure.splitwise.com/apps). When you register, you'll be given a key and secret.
+
+    **Note**: OAuth can be a very confusing protocol to implement correctly, and we **strongly** recommend
+    that you use an existing OAuth library to connect to Splitwise. You can find a list of OAut
+  sources:
+  - openapi/splitwise-openapi.json
+- name: ApiKeyAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API key
+  description: "For speed and ease of prototyping, you can generate a personal API key on your\
+    \ app's details page. You should present this key to the server via the Authorization header\
+    \ as a Bearer token. The API key is an access token for your personal account, so keep it\
+    \ as safe as you would a password.\nIf your key becomes compromised or you want to invalidate\
+    \ your existing key for any other reason, you can do "
+  sources:
+  - openapi/splitwise-openapi.json

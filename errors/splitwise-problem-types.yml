@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: derived
+format: splitwise-error-object
+source: >-
+  Derived from the 4xx response schemas in openapi/splitwise-openapi.json
+  (components.schemas.unauthorized / forbidden / not_found and the inline
+  create_expense 400 schema). Splitwise does NOT use RFC 9457
+  application/problem+json; errors are returned as plain application/json with
+  one of two envelope shapes.
+envelope:
+  media_type: application/json
+  shapes:
+  - status: 401
+    shape: '{ "error": "<message>" }'
+  - status: [400, 403, 404]
+    shape: '{ "errors": { "base": ["<message>", ...] } }'
+  note: >-
+    A 200 OK may still contain an `errors` object; always inspect the body.
+problems:
+- status: 400
+  title: Bad Request
+  meaning: The request had invalid or unrecognized parameters.
+  envelope_field: errors.base
+  example: 'Unrecognized parameter `bad_parameter`'
+  remediation: Validate parameter names/values against the operation schema before sending.
+- status: 401
+  title: Unauthorized
+  meaning: The request is not authenticated (missing/invalid OAuth token or API key).
+  envelope_field: error
+  example: 'Invalid API request: you are not logged in'
+  remediation: Present a valid OAuth 2 Bearer token or personal API key in the Authorization header.
+- status: 403
+  title: Forbidden
+  meaning: The authenticated user lacks permission for the requested action or record.
+  envelope_field: errors.base
+  example: 'Invalid API request: you do not have permission to perform that action'
+  remediation: Confirm the user is a member of the group / owns the record being modified.
+- status: 404
+  title: Not Found
+  meaning: The requested record does not exist (or is not visible to the caller).
+  envelope_field: errors.base
+  example: 'Invalid API Request: record not found'
+  remediation: Verify the resource id; deleted records may require the undelete endpoints.

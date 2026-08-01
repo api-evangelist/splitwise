@@ -1,0 +1,30 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://dev.splitwise.com, https://status.splitwise.com, and
+  openapi/splitwise-openapi.json. Splitwise runs a single "Self-Serve API"
+  versioned in the URL path (v3.0). No dated public API changelog or RFC 8594
+  Sunset/Deprecation header mechanism is published.
+versioning:
+  scheme: path-based
+  current: v3.0
+  mechanism: version segment in the base path (https://secure.splitwise.com/api/v3.0/)
+  docs: https://dev.splitwise.com/
+  notes: >-
+    The current and only documented public major version is v3.0. Splitwise has
+    not published a versioning-policy page or a documented upgrade path between
+    major versions.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    No documented deprecation policy and no RFC 8594 Sunset/Deprecation response
+    headers. No operations in the OpenAPI are flagged deprecated.
+sla:
+  url: null
+  public_uptime_target: null
+  notes: >-
+    No numeric uptime SLA is published for the public API; the API Terms of Use
+    provide the service "as is" and "as available".
+status_page: https://status.splitwise.com/
+deprecated_operations: []

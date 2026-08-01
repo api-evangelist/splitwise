@@ -1,0 +1,26 @@
+{
+  "provider": "splitwise",
+  "sources": [
+    "splitwise-comments-api-openapi.yml",
+    "splitwise-expenses-api-openapi.yml",
+    "splitwise-friends-api-openapi.yml",
+    "splitwise-groups-api-openapi.yml",
+    "splitwise-notifications-api-openapi.yml",
+    "splitwise-other-api-openapi.yml",
+    "splitwise-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "splitwise-comments-api-openapi.yml",
+    "splitwise-expenses-api-openapi.yml",
+    "splitwise-friends-api-openapi.yml",
+    "splitwise-groups-api-openapi.yml",
+    "splitwise-notifications-api-openapi.yml",
+    "splitwise-other-api-openapi.yml",
+    "splitwise-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,8 +1,27 @@
 aid: splitwise
 name: Splitwise
-description: 'Splitwise is a company surfaced as a portfolio company of bullpen-capital, insight-partners,
-  matrix-partners and added to the API Evangelist network as a stub for enrichment. Sector: consumer.
-  This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  Splitwise is an expense-sharing and bill-splitting service that helps
+  roommates, travel groups, couples, and friends track shared costs and settle
+  up fairly. Its public Self-Serve REST API (v3.0) lets third-party applications
+  read and manage a user's groups, friends, expenses, comments, and
+  notifications on that user's behalf, authenticating with OAuth 2.0 or a
+  personal API key. Splitwise was added to the API Evangelist network from a
+  venture-capital portfolio lead and has been enriched from its public developer
+  documentation and OpenAPI specification.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.splitwise.com/assets/press/logos/sw.svg
 url: https://raw.githubusercontent.com/api-evangelist/splitwise/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -14,16 +33,191 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Consumer
-apis: []
+- Expense Management
+- Personal Finance
+- Bill Splitting
+- Payments
+- REST API
+- OAuth
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: splitwise:splitwise-comments-api
+  name: Splitwise comments API
+  description: The comments API from Splitwise — 3 operation(s) for comments.
+  humanURL: https://dev.splitwise.com/
+  baseURL: https://secure.splitwise.com/api/v3.0
+  tags:
+  - comments
+  properties:
+  - type: OpenAPI
+    url: openapi/splitwise-comments-api-openapi.yml
+  - type: Conventions
+    url: conventions/splitwise-conventions.yml
+  - type: ErrorCatalog
+    url: errors/splitwise-problem-types.yml
+  - type: DataModel
+    url: data-model/splitwise-data-model.yml
+- aid: splitwise:splitwise-expenses-api
+  name: Splitwise expenses API
+  description: The expenses API from Splitwise — 6 operation(s) for expenses.
+  humanURL: https://dev.splitwise.com/
+  baseURL: https://secure.splitwise.com/api/v3.0
+  tags:
+  - expenses
+  properties:
+  - type: OpenAPI
+    url: openapi/splitwise-expenses-api-openapi.yml
+  - type: Conventions
+    url: conventions/splitwise-conventions.yml
+  - type: ErrorCatalog
+    url: errors/splitwise-problem-types.yml
+  - type: DataModel
+    url: data-model/splitwise-data-model.yml
+- aid: splitwise:splitwise-friends-api
+  name: Splitwise friends API
+  description: The friends API from Splitwise — 5 operation(s) for friends.
+  humanURL: https://dev.splitwise.com/
+  baseURL: https://secure.splitwise.com/api/v3.0
+  tags:
+  - friends
+  properties:
+  - type: OpenAPI
+    url: openapi/splitwise-friends-api-openapi.yml
+  - type: Conventions
+    url: conventions/splitwise-conventions.yml
+  - type: ErrorCatalog
+    url: errors/splitwise-problem-types.yml
+  - type: DataModel
+    url: data-model/splitwise-data-model.yml
+- aid: splitwise:splitwise-groups-api
+  name: Splitwise groups API
+  description: >-
+    A Group represents a collection of users who share expenses together. For example, some users use
+    a Group to aggregate expenses related to a home. Others use it to represent a trip. Expenses assigned
+    to a group are split among the users of that group. Importantly, two users in a Group can also have
+    expenses with one another outside of the Group.
+  humanURL: https://dev.splitwise.com/
+  baseURL: https://secure.splitwise.com/api/v3.0
+  tags:
+  - groups
+  properties:
+  - type: OpenAPI
+    url: openapi/splitwise-groups-api-openapi.yml
+  - type: Conventions
+    url: conventions/splitwise-conventions.yml
+  - type: ErrorCatalog
+    url: errors/splitwise-problem-types.yml
+  - type: DataModel
+    url: data-model/splitwise-data-model.yml
+- aid: splitwise:splitwise-notifications-api
+  name: Splitwise notifications API
+  description: The notifications API from Splitwise — 1 operation(s) for notifications.
+  humanURL: https://dev.splitwise.com/
+  baseURL: https://secure.splitwise.com/api/v3.0
+  tags:
+  - notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/splitwise-notifications-api-openapi.yml
+  - type: Conventions
+    url: conventions/splitwise-conventions.yml
+  - type: ErrorCatalog
+    url: errors/splitwise-problem-types.yml
+  - type: DataModel
+    url: data-model/splitwise-data-model.yml
+- aid: splitwise:splitwise-other-api
+  name: Splitwise other API
+  description: The other API from Splitwise — 2 operation(s) for other.
+  humanURL: https://dev.splitwise.com/
+  baseURL: https://secure.splitwise.com/api/v3.0
+  tags:
+  - other
+  properties:
+  - type: OpenAPI
+    url: openapi/splitwise-other-api-openapi.yml
+  - type: Conventions
+    url: conventions/splitwise-conventions.yml
+  - type: ErrorCatalog
+    url: errors/splitwise-problem-types.yml
+  - type: DataModel
+    url: data-model/splitwise-data-model.yml
+- aid: splitwise:splitwise-users-api
+  name: Splitwise users API
+  description: Resources to access and modify user information.
+  humanURL: https://dev.splitwise.com/
+  baseURL: https://secure.splitwise.com/api/v3.0
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/splitwise-users-api-openapi.yml
+  - type: Conventions
+    url: conventions/splitwise-conventions.yml
+  - type: ErrorCatalog
+    url: errors/splitwise-problem-types.yml
+  - type: DataModel
+    url: data-model/splitwise-data-model.yml
 common:
+- type: Authentication
+  url: authentication/splitwise-authentication.yml
+- type: OAuthScopes
+  url: scopes/splitwise-scopes.yml
+- type: Conventions
+  url: conventions/splitwise-conventions.yml
+- type: ErrorCatalog
+  url: errors/splitwise-problem-types.yml
+- type: DataModel
+  url: data-model/splitwise-data-model.yml
+- type: Conformance
+  url: conformance/splitwise-conformance.yml
+- type: Lifecycle
+  url: lifecycle/splitwise-lifecycle.yml
+- type: StatusPage
+  url: https://status.splitwise.com/
+- type: Packages
+  url: packages/splitwise-packages.yml
+- type: MCPServer
+  url: mcp/splitwise-mcp.yml
+- type: LLMsTxt
+  url: llms/splitwise-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: WellKnown
+  url: well-known/splitwise-well-known.yml
+- type: SecurityTxt
+  url: well-known/splitwise-security.txt
+- type: VulnerabilityDisclosure
+  url: security/splitwise-vulnerability-disclosure.yml
+- type: Security
+  url: security/splitwise-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/splitwise-domain-security.yml
+- type: DeveloperPortal
+  url: https://dev.splitwise.com/
+- type: Documentation
+  url: https://dev.splitwise.com/
+- type: APIReference
+  url: https://dev.splitwise.com/
+- type: SignUp
+  url: https://secure.splitwise.com/apps
+- type: Blog
+  url: https://blog.splitwise.com/
+- type: TermsOfService
+  url: https://www.splitwise.com/terms
+- type: PrivacyPolicy
+  url: https://www.splitwise.com/privacy
 - type: Website
   url: https://www.splitwise.com
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 15
+  pass: local-v1

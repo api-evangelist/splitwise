@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: derived
+source: >-
+  Derived from the object schemas and id-reference fields in
+  openapi/splitwise-openapi.json (group_id, friendship_id, user_id, from/to
+  user ids on debt, expense_bundle_id). Splitwise ids are plain integers with no
+  type prefix; entity identity is by numeric id per resource type.
+docs: https://dev.splitwise.com/
+notation: >-
+  relationships use has_one / has_many / belongs_to with the foreign-key field
+  name; direction is from the entity that owns the reference.
+entities:
+- {name: User, id_field: id, description: A Splitwise user (friend or member).}
+- {name: CurrentUser, id_field: id, description: The authenticated user (extends User with settings/locale).}
+- {name: Group, id_field: id, description: A collection of users who share expenses together.}
+- {name: Friend, id_field: id, description: A User the current user shares expenses with, plus per-group balances.}
+- {name: Expense, id_field: id, description: A shared cost split among users, optionally in a group.}
+- {name: Share, id_field: user_id, description: One user's owed/paid portion of an expense.}
+- {name: Debt, id_field: null, description: A directional amount one user owes another (from/to user ids).}
+- {name: Balance, id_field: null, description: A per-currency net amount for a user or group.}
+- {name: Comment, id_field: id, description: A comment on an expense.}
+- {name: Notification, id_field: id, description: An activity/feed item for the current user.}
+- {name: Category, id_field: id, description: An expense category (parent categories contain subcategories).}
+- {name: Currency, id_field: currency_code, description: A supported currency code.}
+relationships:
+- {from: Group, to: User, type: has_many, via: members}
+- {from: Group, to: Debt, type: has_many, via: original_debts/simplified_debts}
+- {from: Expense, to: Group, type: belongs_to, via: group_id}
+- {from: Expense, to: Friend, type: belongs_to, via: friendship_id}
+- {from: Expense, to: Share, type: has_many, via: users}
+- {from: Expense, to: Comment, type: has_many, via: comments}
+- {from: Expense, to: Category, type: belongs_to, via: category}
+- {from: Share, to: User, type: belongs_to, via: user_id}
+- {from: Debt, to: User, type: belongs_to, via: from/to}
+- {from: Friend, to: Balance, type: has_many, via: balance}
+- {from: Comment, to: User, type: belongs_to, via: user}
+- {from: Category, to: Category, type: has_many, via: subcategories}
