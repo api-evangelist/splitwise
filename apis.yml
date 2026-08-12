@@ -166,6 +166,8 @@ apis:
   - type: DataModel
     url: data-model/splitwise-data-model.yml
 common:
+- type: Overlay
+  url: overlays/splitwise-api-overlay.yaml
 - type: Authentication
   url: authentication/splitwise-authentication.yml
 - type: OAuthScopes
