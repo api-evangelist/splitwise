@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Splitwise comments API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "/oauth/authorize",
+      "accessTokenUrl": "/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get expense comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_comments",
+            "params": [
+              {
+                "name": "expense_id",
+                "value": "4193",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get expense comments"
+        },
+        {
+          "info": {
+            "name": "Create a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/create_comment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a comment"
+        },
+        {
+          "info": {
+            "name": "Delete a comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/delete_comment/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes a comment. Returns the deleted comment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

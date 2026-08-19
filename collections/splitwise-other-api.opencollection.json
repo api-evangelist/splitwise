@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Splitwise comments other API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "/oauth/authorize",
+      "accessTokenUrl": "/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "other",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Supported currencies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_currencies"
+          },
+          "docs": "Returns a list of all currencies allowed by the system. These are mostly ISO 4217 codes, but we do\nsometimes use pending codes or unofficial, colloquial codes (like BTC instead of XBT for Bitcoin).\n"
+        },
+        {
+          "info": {
+            "name": "Supported categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_categories"
+          },
+          "docs": "Returns a list of all categories Splitwise allows for expenses. There are parent categories that represent groups of categories with subcategories for more specific categorization.\nWhen creating expenses, you must use a subcategory, not a parent category.\nIf you intend for an expense to be represented by the parent category and nothing more specific, please use the \"Other\" subcategory.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

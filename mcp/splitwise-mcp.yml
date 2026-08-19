@@ -1,11 +1,9 @@
 generated: '2026-07-21'
 method: derived
 status: candidate
-source: >-
-  No official or community-hosted Splitwise MCP server was found. This is a
-  CANDIDATE tool surface DERIVED from the operations in
-  openapi/splitwise-openapi.json to show how the Splitwise Self-Serve API would
-  map to Model Context Protocol tools. Not an endorsement of any deployment.
+source: No official or community-hosted Splitwise MCP server was found. This is a CANDIDATE tool surface
+  DERIVED from the operations in openapi/splitwise-openapi.json to show how the Splitwise Self-Serve API
+  would map to Model Context Protocol tools. Not an endorsement of any deployment.
 server:
   name: splitwise
   official: false
@@ -90,3 +88,9 @@ tools:
   method: GET
   path: /get_categories
   summary: List expense categories.
+deployment:
+  mode: none
+  verified: derived
+  tools: 19
+  checked: '2026-08-12'
+  source: catalog MCP census

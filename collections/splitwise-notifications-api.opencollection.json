@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Splitwise comments notifications API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "/oauth/authorize",
+      "accessTokenUrl": "/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get notifications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_notifications",
+            "params": [
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query",
+                "description": "If provided, returns only notifications after this time."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Omit (or provide `0`) to get the maximum number of notifications."
+              }
+            ]
+          },
+          "docs": "Return a list of recent activity on the users account with the most recent items first.\n`content` will be suitable for display in HTML and uses only the `<strong>`, `<strike>`, `<small>`,\n`<br>` and `<font color=\"#FFEE44\">` tags.\n\nThe `type` value indicates what the notification is about. Notification types may be added in the future\nwithout warning. Below is an incomplete list of notification types.\n\n| Type | Meaning |\n| ---- | ------- |\n| 0    | Expense added |\n| 1    | Expense updated |\n| 2\t "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

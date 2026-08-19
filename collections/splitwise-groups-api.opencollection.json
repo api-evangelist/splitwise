@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Splitwise comments groups API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "/oauth/authorize",
+      "accessTokenUrl": "/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List the current user's groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_groups"
+          },
+          "docs": "**Note**: Expenses that are not associated with a group are listed in a group with ID 0.\n"
+        },
+        {
+          "info": {
+            "name": "Get information about a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_group/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get information about a group"
+        },
+        {
+          "info": {
+            "name": "Create a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/create_group",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new group. Adds the current user to the group by default.\n\n**Note**: group user parameters must be flattened into the format `users__{index}__{property}`, where\n`property` is `user_id`, `first_name`, `last_name`, or `email`.\nThe user's email or ID must be provided.\n"
+        },
+        {
+          "info": {
+            "name": "Delete a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/delete_group/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an existing group. Destroys all associated records (expenses, etc.)"
+        },
+        {
+          "info": {
+            "name": "Restore a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/undelete_group/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Restores a deleted group.\n\n**Note**: 200 OK does not indicate a successful response. You must check the `success` value of the response.\n"
+        },
+        {
+          "info": {
+            "name": "Add a user to a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/add_user_to_group",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**Note**: 200 OK does not indicate a successful response. You must check the `success` value of the response.\n"
+        },
+        {
+          "info": {
+            "name": "Remove a user from a group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/remove_user_from_group",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove a user from a group. Does not succeed if the user has a non-zero balance.\n\n**Note:** 200 OK does not indicate a successful response. You must check the success value of the response.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

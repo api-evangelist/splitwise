@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Splitwise comments users API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "/oauth/authorize",
+      "accessTokenUrl": "/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get information about the current user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_current_user"
+          },
+          "docs": "Get information about the current user"
+        },
+        {
+          "info": {
+            "name": "Get information about another user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_user/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get information about another user"
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/update_user/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a user"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

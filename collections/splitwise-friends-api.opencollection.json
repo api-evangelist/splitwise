@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Splitwise comments friends API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "/oauth/authorize",
+      "accessTokenUrl": "/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "friends",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List current user's friends",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_friends"
+          },
+          "docs": "**Note**: `group` objects only include group balances with that friend.\n"
+        },
+        {
+          "info": {
+            "name": "Get details about a friend",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_friend/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID of the friend"
+              }
+            ]
+          },
+          "docs": "Get details about a friend"
+        },
+        {
+          "info": {
+            "name": "Add a friend",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/create_friend",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a friend. If the other user does not exist, you must supply `user_first_name`.\nIf the other user exists, `user_first_name` and `user_last_name` will be ignored.\n"
+        },
+        {
+          "info": {
+            "name": "Add friends",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/create_friends",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add multiple friends at once.\n\nFor each user, if the other user does not exist, you must supply `users__{index}__first_name`.\n\n**Note**: user parameters must be flattened into the format `users__{index}__{property}`, where\n`property` is `first_name`, `last_name`, or `email`.\n"
+        },
+        {
+          "info": {
+            "name": "Delete friendship",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/delete_friend/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "User ID of the friend"
+              }
+            ]
+          },
+          "docs": "Given a friend ID, break off the friendship between the current user and the specified user.\n\n**Note**: 200 OK does not indicate a successful response. You must check the `success` value of the response.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

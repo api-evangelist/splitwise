@@ -1,0 +1,179 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Splitwise comments expenses API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "/oauth/authorize",
+      "accessTokenUrl": "/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "expenses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get expense information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_expense/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get expense information"
+        },
+        {
+          "info": {
+            "name": "List the current user's expenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://secure.splitwise.com/api/v3.0/get_expenses",
+            "params": [
+              {
+                "name": "group_id",
+                "value": "",
+                "type": "query",
+                "description": "If provided, only expenses in that group will be returned, and `friend_id` will be ignored."
+              },
+              {
+                "name": "friend_id",
+                "value": "",
+                "type": "query",
+                "description": "ID of another user. If provided, only expenses between the current and provided user will be returned."
+              },
+              {
+                "name": "dated_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dated_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_after",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "updated_before",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List the current user's expenses"
+        },
+        {
+          "info": {
+            "name": "Create an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/create_expense",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates an expense. You may either split an expense equally (only with `group_id` provided),\nor supply a list of shares.\n\nWhen splitting equally, the authenticated user is assumed to be the payer.\n\nWhen providing a list of shares, each share must include `paid_share` and `owed_share`, and must be identified by one of the following:\n- `email`, `first_name`, and `last_name`\n- `user_id`\n\n**Note**: 200 OK does not indicate a successful response. The operation was successful only if `errors` is empty"
+        },
+        {
+          "info": {
+            "name": "Update an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/update_expense/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the expense to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an expense. Parameters are the same as in `create_expense`, but you only need to include parameters\nthat are changing from the previous values. If any values is supplied for `users__{index}__{property}`, _all_\nshares for the expense will be overwritten with the provided values.\n\n**Note**: 200 OK does not indicate a successful response. The operation was successful only if `errors` is empty.\n"
+        },
+        {
+          "info": {
+            "name": "Delete an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/delete_expense/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the expense to delete"
+              }
+            ]
+          },
+          "docs": "**Note**: 200 OK does not indicate a successful response. The operation was successful only if `success` is true.\n"
+        },
+        {
+          "info": {
+            "name": "Restore an expense",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://secure.splitwise.com/api/v3.0/undelete_expense/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the expense to restore"
+              }
+            ]
+          },
+          "docs": "**Note**: 200 OK does not indicate a successful response. The operation was successful only if `success` is true.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
