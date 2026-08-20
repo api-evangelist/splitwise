@@ -42,6 +42,15 @@ tags:
 - Bill Splitting
 - Payments
 - REST API
+- Authentication
+tags_raw:
+- Company
+- Consumer
+- Expense Management
+- Personal Finance
+- Bill Splitting
+- Payments
+- REST API
 - OAuth
 maintainers:
 - FN: Kin Lane
@@ -55,6 +64,8 @@ apis:
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
   tags:
+  - Comments
+  tags_raw:
   - comments
   properties:
   - type: OpenAPI
@@ -71,6 +82,8 @@ apis:
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
   tags:
+  - Expenses
+  tags_raw:
   - expenses
   properties:
   - type: OpenAPI
@@ -87,6 +100,8 @@ apis:
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
   tags:
+  - Friends
+  tags_raw:
   - friends
   properties:
   - type: OpenAPI
@@ -107,6 +122,8 @@ apis:
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
   tags:
+  - Group
+  tags_raw:
   - groups
   properties:
   - type: OpenAPI
@@ -123,6 +140,8 @@ apis:
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
   tags:
+  - Notification
+  tags_raw:
   - notifications
   properties:
   - type: OpenAPI
@@ -138,7 +157,8 @@ apis:
   description: The other API from Splitwise — 2 operation(s) for other.
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
-  tags:
+  tags: []
+  tags_raw:
   - other
   properties:
   - type: OpenAPI
@@ -155,6 +175,8 @@ apis:
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
