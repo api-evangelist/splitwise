@@ -94,7 +94,7 @@ apis:
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
   tags:
-  - expenses
+  - Expenses
   tags_raw:
   - expenses
   properties:
@@ -112,7 +112,7 @@ apis:
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
   tags:
-  - friends
+  - Friends
   tags_raw:
   - friends
   properties:
