@@ -1,13 +1,7 @@
 {
   "provider": "splitwise",
   "sources": [
-    "splitwise-comments-api-openapi.yml",
-    "splitwise-expenses-api-openapi.yml",
-    "splitwise-friends-api-openapi.yml",
-    "splitwise-groups-api-openapi.yml",
-    "splitwise-notifications-api-openapi.yml",
-    "splitwise-other-api-openapi.yml",
-    "splitwise-users-api-openapi.yml"
+    "_original/splitwise-openapi.json"
   ],
   "outputs": [
     "splitwise-comments-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "splitwise-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "splitwise-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "splitwise-expenses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "splitwise-friends-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "splitwise-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "splitwise-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "splitwise-other-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "splitwise-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
