@@ -298,170 +298,7 @@ paths:
       operationId: postUndeleteExpenseById
       x-operation-id-source: derived
 components:
-  responses:
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
-    unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
-    not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
   schemas:
-    by_shares:
-      allOf:
-      - $ref: '#/components/schemas/common'
-      - type: object
-        properties:
-          group_id:
-            type: integer
-            description: The group to put this expense in, or `0` to create an expense outside of a group.
-          users__0__user_id:
-            type: integer
-            example: 54123
-          users__0__paid_share:
-            type: string
-            example: '25'
-            description: Decimal amount as a string with 2 decimal places. The amount this user paid for the expense
-          users__0__owed_share:
-            type: string
-            example: '13.55'
-            description: Decimal amount as a string with 2 decimal places. The amount this user owes for the expense
-          users__1__first_name:
-            type: string
-            example: Neu
-          users__1__last_name:
-            type: string
-            example: Yewzer
-          users__1__email:
-            type: string
-            example: neuyewxyz@example.com
-          users__1__paid_share:
-            type: string
-            example: '0'
-            description: Decimal amount as a string with 2 decimal places. The amount this user paid for the expense
-          users__1__owed_share:
-            type: string
-            example: '11.45'
-            description: Decimal amount as a string with 2 decimal places. The amount this user owes for the expense
-        additionalProperties:
-          x-additionalPropertiesName: users__{index}__{property}
-          type: string
-      - required:
-        - group_id
-        - description
-        - cost
-    comment:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 79800950
-        content:
-          type: string
-          example: 'John D. updated this transaction: - The cost changed from $6.99 to $8.99'
-        comment_type:
-          type: string
-          enum:
-          - System
-          - User
-        relation_type:
-          type: string
-          enum:
-          - ExpenseComment
-        relation_id:
-          type: integer
-          example: 855870953
-          description: ID of the subject of the comment
-        created_at:
-          type: string
-          format: date-time
-        deleted_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        user:
-          $ref: '#/components/schemas/comment_user'
-    user:
-      type: object
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-          example: Ada
-        last_name:
-          type:
-          - string
-          - 'null'
-          example: Lovelace
-        email:
-          type: string
-          example: ada@example.com
-        registration_status:
-          type: string
-          enum:
-          - confirmed
-          - dummy
-          - invited
-        picture:
-          type: object
-          properties:
-            small:
-              type: string
-            medium:
-              type: string
-            large:
-              type: string
-        custom_picture:
-          type: boolean
-          example: false
-    comment_user:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 491923
-        first_name:
-          type: string
-          example: Jane
-        last_name:
-          type: string
-          example: Doe
-        picture:
-          type: object
-          properties:
-            medium:
-              type: string
-              example: image_url
-    forbidden:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API request: you do not have permission to perform that action'
-    unauthorized:
-      type: object
-      properties:
-        error:
-          type: string
-          example: 'Invalid API request: you are not logged in'
     not_found:
       type: object
       properties:
@@ -473,23 +310,43 @@ components:
               items:
                 type: string
                 example: 'Invalid API Request: record not found'
-    equal_group_split:
-      allOf:
-      - $ref: '#/components/schemas/common'
-      - type: object
-        properties:
-          group_id:
-            type: integer
-            description: The group to put this expense in.
-          split_equally:
-            type: boolean
-            enum:
-            - true
-      - required:
-        - group_id
-        - split_equally
-        - description
-        - cost
+    common:
+      type: object
+      properties:
+        cost:
+          type: string
+          example: '25'
+          description: A string representation of a decimal value, limited to 2 decimal places
+        description:
+          type: string
+          description: A short description of the expense
+          example: Grocery run
+        details:
+          type:
+          - string
+          - 'null'
+          description: Also known as "notes."
+        date:
+          type: string
+          description: The date and time the expense took place. May differ from `created_at`
+          format: date-time
+          example: '2012-05-02T13:00:00Z'
+        repeat_interval:
+          type: string
+          enum:
+          - never
+          - weekly
+          - fortnightly
+          - monthly
+          - yearly
+        currency_code:
+          type: string
+          example: USD
+          description: A currency code. Must be in the list from `get_currencies`
+        category_id:
+          type: integer
+          description: A category id from `get_categories`
+          example: 15
     expense:
       allOf:
       - $ref: '#/components/schemas/common'
@@ -663,6 +520,58 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/comment'
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+          example: Ada
+        last_name:
+          type:
+          - string
+          - 'null'
+          example: Lovelace
+        email:
+          type: string
+          example: ada@example.com
+        registration_status:
+          type: string
+          enum:
+          - confirmed
+          - dummy
+          - invited
+        picture:
+          type: object
+          properties:
+            small:
+              type: string
+            medium:
+              type: string
+            large:
+              type: string
+        custom_picture:
+          type: boolean
+          example: false
+    comment_user:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 491923
+        first_name:
+          type: string
+          example: Jane
+        last_name:
+          type: string
+          example: Doe
+        picture:
+          type: object
+          properties:
+            medium:
+              type: string
+              example: image_url
     share:
       type: object
       properties:
@@ -680,43 +589,134 @@ components:
         net_balance:
           type: string
           example: '4.49'
-    common:
+    forbidden:
       type: object
       properties:
-        cost:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API request: you do not have permission to perform that action'
+    equal_group_split:
+      allOf:
+      - $ref: '#/components/schemas/common'
+      - type: object
+        properties:
+          group_id:
+            type: integer
+            description: The group to put this expense in.
+          split_equally:
+            type: boolean
+            enum:
+            - true
+      - required:
+        - group_id
+        - split_equally
+        - description
+        - cost
+    unauthorized:
+      type: object
+      properties:
+        error:
           type: string
-          example: '25'
-          description: A string representation of a decimal value, limited to 2 decimal places
-        description:
+          example: 'Invalid API request: you are not logged in'
+    comment:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 79800950
+        content:
           type: string
-          description: A short description of the expense
-          example: Grocery run
-        details:
+          example: 'John D. updated this transaction: - The cost changed from $6.99 to $8.99'
+        comment_type:
+          type: string
+          enum:
+          - System
+          - User
+        relation_type:
+          type: string
+          enum:
+          - ExpenseComment
+        relation_id:
+          type: integer
+          example: 855870953
+          description: ID of the subject of the comment
+        created_at:
+          type: string
+          format: date-time
+        deleted_at:
           type:
           - string
           - 'null'
-          description: Also known as "notes."
-        date:
-          type: string
-          description: The date and time the expense took place. May differ from `created_at`
           format: date-time
-          example: '2012-05-02T13:00:00Z'
-        repeat_interval:
+        user:
+          $ref: '#/components/schemas/comment_user'
+    by_shares:
+      allOf:
+      - $ref: '#/components/schemas/common'
+      - type: object
+        properties:
+          group_id:
+            type: integer
+            description: The group to put this expense in, or `0` to create an expense outside of a group.
+          users__0__user_id:
+            type: integer
+            example: 54123
+          users__0__paid_share:
+            type: string
+            example: '25'
+            description: Decimal amount as a string with 2 decimal places. The amount this user paid for the expense
+          users__0__owed_share:
+            type: string
+            example: '13.55'
+            description: Decimal amount as a string with 2 decimal places. The amount this user owes for the expense
+          users__1__first_name:
+            type: string
+            example: Neu
+          users__1__last_name:
+            type: string
+            example: Yewzer
+          users__1__email:
+            type: string
+            example: neuyewxyz@example.com
+          users__1__paid_share:
+            type: string
+            example: '0'
+            description: Decimal amount as a string with 2 decimal places. The amount this user paid for the expense
+          users__1__owed_share:
+            type: string
+            example: '11.45'
+            description: Decimal amount as a string with 2 decimal places. The amount this user owes for the expense
+        additionalProperties:
+          x-additionalPropertiesName: users__{index}__{property}
           type: string
-          enum:
-          - never
-          - weekly
-          - fortnightly
-          - monthly
-          - yearly
-        currency_code:
-          type: string
-          example: USD
-          description: A currency code. Must be in the list from `get_currencies`
-        category_id:
-          type: integer
-          description: A category id from `get_categories`
-          example: 15
+      - required:
+        - group_id
+        - description
+        - cost
+  responses:
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
+    not_found:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
   securitySchemes:
     OAuth:
       type: oauth2

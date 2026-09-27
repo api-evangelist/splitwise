@@ -71,7 +71,7 @@ maintainers:
   email: info@apis.io
 apis:
 - aid: splitwise:splitwise-comments-api
-  name: Splitwise comments API
+  name: Splitwise Comments API
   description: The comments API from Splitwise — 3 operation(s) for comments.
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
@@ -89,7 +89,7 @@ apis:
   - type: DataModel
     url: data-model/splitwise-data-model.yml
 - aid: splitwise:splitwise-expenses-api
-  name: Splitwise expenses API
+  name: Splitwise Expenses API
   description: The expenses API from Splitwise — 6 operation(s) for expenses.
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
@@ -107,7 +107,7 @@ apis:
   - type: DataModel
     url: data-model/splitwise-data-model.yml
 - aid: splitwise:splitwise-friends-api
-  name: Splitwise friends API
+  name: Splitwise Friends API
   description: The friends API from Splitwise — 5 operation(s) for friends.
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
@@ -125,7 +125,7 @@ apis:
   - type: DataModel
     url: data-model/splitwise-data-model.yml
 - aid: splitwise:splitwise-groups-api
-  name: Splitwise groups API
+  name: Splitwise Groups API
   description: >-
     A Group represents a collection of users who share expenses together. For example, some users use
     a Group to aggregate expenses related to a home. Others use it to represent a trip. Expenses assigned
@@ -147,7 +147,7 @@ apis:
   - type: DataModel
     url: data-model/splitwise-data-model.yml
 - aid: splitwise:splitwise-notifications-api
-  name: Splitwise notifications API
+  name: Splitwise Notifications API
   description: The notifications API from Splitwise — 1 operation(s) for notifications.
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
@@ -165,7 +165,7 @@ apis:
   - type: DataModel
     url: data-model/splitwise-data-model.yml
 - aid: splitwise:splitwise-other-api
-  name: Splitwise other API
+  name: Splitwise Other API
   description: The other API from Splitwise — 2 operation(s) for other.
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0
@@ -182,7 +182,7 @@ apis:
   - type: DataModel
     url: data-model/splitwise-data-model.yml
 - aid: splitwise:splitwise-users-api
-  name: Splitwise users API
+  name: Splitwise Users API
   description: Resources to access and modify user information.
   humanURL: https://dev.splitwise.com/
   baseURL: https://secure.splitwise.com/api/v3.0

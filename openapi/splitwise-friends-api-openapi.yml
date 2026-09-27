@@ -244,26 +244,62 @@ paths:
       operationId: postDeleteFriendById
       x-operation-id-source: derived
 components:
-  responses:
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
-    unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
-    not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
   schemas:
+    not_found:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API Request: record not found'
+    balance:
+      type: object
+      properties:
+        currency_code:
+          type: string
+          example: USD
+        amount:
+          type: string
+          example: '414.5'
+    forbidden:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API request: you do not have permission to perform that action'
+    friend:
+      allOf:
+      - $ref: '#/components/schemas/user'
+      - type: object
+        properties:
+          groups:
+            type: array
+            items:
+              type: object
+              properties:
+                group_id:
+                  type: integer
+                  example: 571
+                balance:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/balance'
+          balance:
+            type: array
+            items:
+              $ref: '#/components/schemas/balance'
+          updated_at:
+            type: string
+            format: date-time
     user:
       type: object
       properties:
@@ -298,67 +334,31 @@ components:
         custom_picture:
           type: boolean
           example: false
-    forbidden:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API request: you do not have permission to perform that action'
     unauthorized:
       type: object
       properties:
         error:
           type: string
           example: 'Invalid API request: you are not logged in'
+  responses:
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
     not_found:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API Request: record not found'
-    balance:
-      type: object
-      properties:
-        currency_code:
-          type: string
-          example: USD
-        amount:
-          type: string
-          example: '414.5'
-    friend:
-      allOf:
-      - $ref: '#/components/schemas/user'
-      - type: object
-        properties:
-          groups:
-            type: array
-            items:
-              type: object
-              properties:
-                group_id:
-                  type: integer
-                  example: 571
-                balance:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/balance'
-          balance:
-            type: array
-            items:
-              $ref: '#/components/schemas/balance'
-          updated_at:
-            type: string
-            format: date-time
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
   securitySchemes:
     OAuth:
       type: oauth2

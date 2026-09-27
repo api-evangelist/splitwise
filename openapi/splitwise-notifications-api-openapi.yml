@@ -118,12 +118,6 @@ components:
           schema:
             $ref: '#/components/schemas/unauthorized'
   schemas:
-    unauthorized:
-      type: object
-      properties:
-        error:
-          type: string
-          example: 'Invalid API request: you are not logged in'
     notification:
       type: object
       properties:
@@ -164,6 +158,12 @@ components:
         content:
           type: string
           example: <strong>You</strong> paid <strong>Jon H.</strong>.<br><font color=\"#5bc5a7\">You paid $23.45</font>
+    unauthorized:
+      type: object
+      properties:
+        error:
+          type: string
+          example: 'Invalid API request: you are not logged in'
   securitySchemes:
     OAuth:
       type: oauth2

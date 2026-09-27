@@ -355,26 +355,35 @@ paths:
       operationId: postRemoveUserFromGroup
       x-operation-id-source: derived
 components:
-  responses:
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
-    unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
-    not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
   schemas:
+    debt:
+      type: object
+      properties:
+        from:
+          type: integer
+          example: 18523
+          description: User ID
+        to:
+          type: integer
+          example: 90261
+          description: User ID
+        amount:
+          type: string
+          example: '414.5'
+        currency_code:
+          type: string
+          example: USD
+    not_found:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API Request: record not found'
     user:
       type: object
       properties:
@@ -409,23 +418,6 @@ components:
         custom_picture:
           type: boolean
           example: false
-    debt:
-      type: object
-      properties:
-        from:
-          type: integer
-          example: 18523
-          description: User ID
-        to:
-          type: integer
-          example: 90261
-          description: User ID
-        amount:
-          type: string
-          example: '414.5'
-        currency_code:
-          type: string
-          example: USD
     forbidden:
       type: object
       properties:
@@ -537,17 +529,25 @@ components:
         error:
           type: string
           example: 'Invalid API request: you are not logged in'
+  responses:
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
     not_found:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API Request: record not found'
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
   securitySchemes:
     OAuth:
       type: oauth2
