@@ -76,19 +76,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    parent_category:
-      allOf:
-      - $ref: '#/components/schemas/category'
-      - type: object
-        properties:
-          id:
-            example: 1
-          name:
-            example: Utilities
-          subcategories:
-            type: array
-            items:
-              $ref: '#/components/schemas/category'
     category:
       type: object
       properties:
@@ -122,6 +109,19 @@ components:
                 xlarge:
                   type: string
                   format: uri
+    parent_category:
+      allOf:
+      - $ref: '#/components/schemas/category'
+      - type: object
+        properties:
+          id:
+            example: 1
+          name:
+            example: Utilities
+          subcategories:
+            type: array
+            items:
+              $ref: '#/components/schemas/category'
   securitySchemes:
     OAuth:
       type: oauth2

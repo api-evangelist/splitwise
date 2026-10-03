@@ -355,6 +355,25 @@ paths:
       operationId: postRemoveUserFromGroup
       x-operation-id-source: derived
 components:
+  responses:
+    not_found:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
   schemas:
     debt:
       type: object
@@ -373,62 +392,6 @@ components:
         currency_code:
           type: string
           example: USD
-    not_found:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API Request: record not found'
-    user:
-      type: object
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-          example: Ada
-        last_name:
-          type:
-          - string
-          - 'null'
-          example: Lovelace
-        email:
-          type: string
-          example: ada@example.com
-        registration_status:
-          type: string
-          enum:
-          - confirmed
-          - dummy
-          - invited
-        picture:
-          type: object
-          properties:
-            small:
-              type: string
-            medium:
-              type: string
-            large:
-              type: string
-        custom_picture:
-          type: boolean
-          example: false
-    forbidden:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API request: you do not have permission to perform that action'
     group:
       type: object
       properties:
@@ -529,25 +492,62 @@ components:
         error:
           type: string
           example: 'Invalid API request: you are not logged in'
-  responses:
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
     not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
-    unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API Request: record not found'
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+          example: Ada
+        last_name:
+          type:
+          - string
+          - 'null'
+          example: Lovelace
+        email:
+          type: string
+          example: ada@example.com
+        registration_status:
+          type: string
+          enum:
+          - confirmed
+          - dummy
+          - invited
+        picture:
+          type: object
+          properties:
+            small:
+              type: string
+            medium:
+              type: string
+            large:
+              type: string
+        custom_picture:
+          type: boolean
+          example: false
+    forbidden:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API request: you do not have permission to perform that action'
   securitySchemes:
     OAuth:
       type: oauth2

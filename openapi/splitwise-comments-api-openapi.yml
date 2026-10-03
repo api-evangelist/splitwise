@@ -137,29 +137,26 @@ paths:
       operationId: postDeleteCommentById
       x-operation-id-source: derived
 components:
-  schemas:
+  responses:
     not_found:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API Request: record not found'
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
     forbidden:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API request: you do not have permission to perform that action'
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
+  schemas:
     comment_user:
       type: object
       properties:
@@ -184,6 +181,17 @@ components:
         error:
           type: string
           example: 'Invalid API request: you are not logged in'
+    not_found:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API Request: record not found'
     comment:
       type: object
       properties:
@@ -216,25 +224,17 @@ components:
           format: date-time
         user:
           $ref: '#/components/schemas/comment_user'
-  responses:
     forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
-    not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
-    unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API request: you do not have permission to perform that action'
   securitySchemes:
     OAuth:
       type: oauth2

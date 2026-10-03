@@ -110,7 +110,37 @@ paths:
       operationId: postUpdateUserById
       x-operation-id-source: derived
 components:
+  responses:
+    not_found:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
   schemas:
+    forbidden:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API request: you do not have permission to perform that action'
     not_found:
       type: object
       properties:
@@ -122,6 +152,34 @@ components:
               items:
                 type: string
                 example: 'Invalid API Request: record not found'
+    unauthorized:
+      type: object
+      properties:
+        error:
+          type: string
+          example: 'Invalid API request: you are not logged in'
+    current_user:
+      allOf:
+      - $ref: '#/components/schemas/user'
+      - type: object
+        properties:
+          notifications_read:
+            type: string
+            example: '2017-06-02T20:21:57Z'
+            description: ISO 8601 date/time indicating the last time notifications were read
+          notifications_count:
+            type: integer
+            example: 12
+            description: Number of unread notifications since notifiations_read
+          notifications:
+            $ref: '#/components/schemas/notification_settings'
+          default_currency:
+            type: string
+            example: USD
+          locale:
+            type: string
+            example: en
+            description: ISO_639-1 2-letter locale code
     user:
       type: object
       properties:
@@ -156,45 +214,6 @@ components:
         custom_picture:
           type: boolean
           example: false
-    forbidden:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API request: you do not have permission to perform that action'
-    current_user:
-      allOf:
-      - $ref: '#/components/schemas/user'
-      - type: object
-        properties:
-          notifications_read:
-            type: string
-            example: '2017-06-02T20:21:57Z'
-            description: ISO 8601 date/time indicating the last time notifications were read
-          notifications_count:
-            type: integer
-            example: 12
-            description: Number of unread notifications since notifiations_read
-          notifications:
-            $ref: '#/components/schemas/notification_settings'
-          default_currency:
-            type: string
-            example: USD
-          locale:
-            type: string
-            example: en
-            description: ISO_639-1 2-letter locale code
-    unauthorized:
-      type: object
-      properties:
-        error:
-          type: string
-          example: 'Invalid API request: you are not logged in'
     notification_settings:
       type: object
       description: User's notification preferences
@@ -202,25 +221,6 @@ components:
         type: boolean
       example:
         added_as_friend: true
-  responses:
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
-    not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
-    unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
   securitySchemes:
     OAuth:
       type: oauth2
