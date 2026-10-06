@@ -45,7 +45,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-10-06'
 tags:
 - Company
 - Consumer
@@ -200,6 +200,8 @@ apis:
   - type: DataModel
     url: data-model/splitwise-data-model.yml
 common:
+- url: https://blog.splitwise.com/feed/
+  type: BlogRSS
 - type: Overlay
   url: overlays/splitwise-api-overlay.yaml
 - type: Authentication
