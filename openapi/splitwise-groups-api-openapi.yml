@@ -355,7 +355,71 @@ paths:
       operationId: postRemoveUserFromGroup
       x-operation-id-source: derived
 components:
+  responses:
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
+    not_found:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
   schemas:
+    forbidden:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API request: you do not have permission to perform that action'
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+          example: Ada
+        last_name:
+          type:
+          - string
+          - 'null'
+          example: Lovelace
+        email:
+          type: string
+          example: ada@example.com
+        registration_status:
+          type: string
+          enum:
+          - confirmed
+          - dummy
+          - invited
+        picture:
+          type: object
+          properties:
+            small:
+              type: string
+            medium:
+              type: string
+            large:
+              type: string
+        custom_picture:
+          type: boolean
+          example: false
     group:
       type: object
       properties:
@@ -450,68 +514,6 @@ components:
           type: string
           example: https://www.splitwise.com/join/abQwErTyuI+12
           description: A link the user can send to a friend to join the group directly
-    user:
-      type: object
-      properties:
-        id:
-          type: integer
-        first_name:
-          type: string
-          example: Ada
-        last_name:
-          type:
-          - string
-          - 'null'
-          example: Lovelace
-        email:
-          type: string
-          example: ada@example.com
-        registration_status:
-          type: string
-          enum:
-          - confirmed
-          - dummy
-          - invited
-        picture:
-          type: object
-          properties:
-            small:
-              type: string
-            medium:
-              type: string
-            large:
-              type: string
-        custom_picture:
-          type: boolean
-          example: false
-    forbidden:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API request: you do not have permission to perform that action'
-    unauthorized:
-      type: object
-      properties:
-        error:
-          type: string
-          example: 'Invalid API request: you are not logged in'
-    not_found:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API Request: record not found'
     debt:
       type: object
       properties:
@@ -529,25 +531,23 @@ components:
         currency_code:
           type: string
           example: USD
-  responses:
     unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
+      type: object
+      properties:
+        error:
+          type: string
+          example: 'Invalid API request: you are not logged in'
     not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API Request: record not found'
   securitySchemes:
     OAuth:
       type: oauth2

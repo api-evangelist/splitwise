@@ -244,7 +244,37 @@ paths:
       operationId: postDeleteFriendById
       x-operation-id-source: derived
 components:
+  responses:
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
+    not_found:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
   schemas:
+    forbidden:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API request: you do not have permission to perform that action'
     user:
       type: object
       properties:
@@ -303,17 +333,6 @@ components:
           updated_at:
             type: string
             format: date-time
-    forbidden:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API request: you do not have permission to perform that action'
     unauthorized:
       type: object
       properties:
@@ -340,25 +359,6 @@ components:
               items:
                 type: string
                 example: 'Invalid API Request: record not found'
-  responses:
-    unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
-    not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
   securitySchemes:
     OAuth:
       type: oauth2

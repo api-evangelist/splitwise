@@ -137,25 +137,26 @@ paths:
       operationId: postDeleteCommentById
       x-operation-id-source: derived
 components:
+  responses:
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
+    not_found:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
   schemas:
-    comment_user:
-      type: object
-      properties:
-        id:
-          type: integer
-          example: 491923
-        first_name:
-          type: string
-          example: Jane
-        last_name:
-          type: string
-          example: Doe
-        picture:
-          type: object
-          properties:
-            medium:
-              type: string
-              example: image_url
     forbidden:
       type: object
       properties:
@@ -167,12 +168,6 @@ components:
               items:
                 type: string
                 example: 'Invalid API request: you do not have permission to perform that action'
-    unauthorized:
-      type: object
-      properties:
-        error:
-          type: string
-          example: 'Invalid API request: you are not logged in'
     comment:
       type: object
       properties:
@@ -205,6 +200,30 @@ components:
           format: date-time
         user:
           $ref: '#/components/schemas/comment_user'
+    unauthorized:
+      type: object
+      properties:
+        error:
+          type: string
+          example: 'Invalid API request: you are not logged in'
+    comment_user:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 491923
+        first_name:
+          type: string
+          example: Jane
+        last_name:
+          type: string
+          example: Doe
+        picture:
+          type: object
+          properties:
+            medium:
+              type: string
+              example: image_url
     not_found:
       type: object
       properties:
@@ -216,25 +235,6 @@ components:
               items:
                 type: string
                 example: 'Invalid API Request: record not found'
-  responses:
-    unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
-    not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
   securitySchemes:
     OAuth:
       type: oauth2

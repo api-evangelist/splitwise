@@ -110,7 +110,37 @@ paths:
       operationId: postUpdateUserById
       x-operation-id-source: derived
 components:
+  responses:
+    unauthorized:
+      description: Invalid API key or OAuth access token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/unauthorized'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/forbidden'
+    not_found:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/not_found'
   schemas:
+    forbidden:
+      type: object
+      properties:
+        errors:
+          type: object
+          properties:
+            base:
+              type: array
+              items:
+                type: string
+                example: 'Invalid API request: you do not have permission to perform that action'
     user:
       type: object
       properties:
@@ -145,17 +175,6 @@ components:
         custom_picture:
           type: boolean
           example: false
-    forbidden:
-      type: object
-      properties:
-        errors:
-          type: object
-          properties:
-            base:
-              type: array
-              items:
-                type: string
-                example: 'Invalid API request: you do not have permission to perform that action'
     unauthorized:
       type: object
       properties:
@@ -184,6 +203,13 @@ components:
             type: string
             example: en
             description: ISO_639-1 2-letter locale code
+    notification_settings:
+      type: object
+      description: User's notification preferences
+      additionalProperties:
+        type: boolean
+      example:
+        added_as_friend: true
     not_found:
       type: object
       properties:
@@ -195,32 +221,6 @@ components:
               items:
                 type: string
                 example: 'Invalid API Request: record not found'
-    notification_settings:
-      type: object
-      description: User's notification preferences
-      additionalProperties:
-        type: boolean
-      example:
-        added_as_friend: true
-  responses:
-    unauthorized:
-      description: Invalid API key or OAuth access token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/unauthorized'
-    not_found:
-      description: Not Found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/not_found'
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/forbidden'
   securitySchemes:
     OAuth:
       type: oauth2
